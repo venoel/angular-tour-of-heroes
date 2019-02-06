@@ -20,8 +20,8 @@ export class HeroService {
   ) { }
 
   getHeroes(): Observable<Hero[]> {
-    this.messageService.add('HeroSerice: fetched heroes.');
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
+      tap(_ => this.log('HeroSerice: fetched heroes.')),
       catchError(this.handleError('getHeroes', []))
     );
   }
